@@ -41,10 +41,30 @@ describe("Inventory Page", () => {
     await loginPage.loginBox.submitBtn.click();
   });
 
-  it('Prices should be sorted in ascending order when selecting option "Price (low to high)"', async () => {
+  it('UC-1: Prices should be sorted in ascending order when selecting option "Price (low to high)"', async () => {
     await inventoryPage.secondaryHeader.sortBy("low to high");
-    const pricesArr = await inventoryPage.inventoryList.getPrices();
+    const pricesArr = await inventoryPage.inventoryList.getPricesArr();
     const sortedPricesArr = [...pricesArr].sort((a, b) => a - b);
     expect(pricesArr).toEqual(sortedPricesArr);
+  });
+
+  describe("UC-2: Cart State Logic", () => {
+    it("The cart badge should show 2, when adding two different items to the cart", async () => {
+      const buttons = await inventoryPage.inventoryList.itemButtons;
+      await buttons[0].click();
+      await buttons[3].click();
+
+      await expect(inventoryPage.primaryHeader.shoppingCartBadge).toHaveText(
+        "2",
+      );
+    });
+
+    it('The cart badge should update to 1, when removing one item via the "remove" item from the cart', async () => {
+      const buttons = await inventoryPage.inventoryList.itemButtons;
+      await buttons[0].click();
+      await expect(inventoryPage.primaryHeader.shoppingCartBadge).toHaveText(
+        "1",
+      );
+    });
   });
 });

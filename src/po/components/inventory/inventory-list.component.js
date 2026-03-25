@@ -5,7 +5,7 @@ class InventoryListComponent extends BaseComponent {
     super('//div[@class="inventory_list"]');
   }
 
-  async getPrices() {
+  async getPricesArr() {
     const priceEls = await this.rootEl.$$(
       '//div[@class="inventory_item_price"]',
     );
@@ -16,6 +16,10 @@ class InventoryListComponent extends BaseComponent {
     });
 
     return pricesArray;
+  }
+
+  get itemButtons() {
+    return this.rootEl.$$('//div[@class="inventory_item"]//button');
   }
 }
 
