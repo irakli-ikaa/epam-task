@@ -8,6 +8,10 @@ class PrimaryHeaderComponent extends BaseComponent {
   get shoppingCartBadge() {
     return this.rootEl.$('//span[@class="shopping_cart_badge"]');
   }
+
+  get menuBtn() {
+    return this.rootEl.$('//button[text()="Open Menu"]');
+  }
 }
 
 module.exports = PrimaryHeaderComponent;

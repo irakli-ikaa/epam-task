@@ -9,8 +9,10 @@ class InventoryListComponent extends BaseComponent {
     return this.rootEl.$$('//div[@class="inventory_item_price"]');
   }
 
-  get itemButtons() {
-    return this.rootEl.$$('//div[@class="inventory_item"]//button');
+  getBtnOf(item) {
+    return this.rootEl.$(
+      `//div[@class="inventory_item" and .//div[text()="${item}"]]//button`,
+    );
   }
 }
 
