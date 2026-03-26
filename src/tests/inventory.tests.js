@@ -9,9 +9,11 @@ describe("Inventory Page", () => {
   });
 
   it('UC-1: Prices should be sorted in ascending order when selecting option "Price (low to high)"', async () => {
-    await pages("inventory")
-      .secondaryHeader.getSortingOption("low to high")
-      .click();
+    await pages(
+      "inventory",
+    ).secondaryHeader.sortingSelection.selectByVisibleText(
+      "Price (low to high)",
+    );
     const priceElements = await pages("inventory").inventoryList.priceElements;
     const pricesArr = await priceElements.map(async (el) => {
       const text = await el.getText();
