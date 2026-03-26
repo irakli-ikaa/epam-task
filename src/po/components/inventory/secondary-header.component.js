@@ -7,11 +7,11 @@ class SecondaryHeaderComponent extends BaseComponent {
 
   /**
    *
-   * @param  text  {'A to Z' | 'Z to A' | 'low to high' | 'high to low'}
+   * @param  option  {'A to Z' | 'Z to A' | 'low to high' | 'high to low'}
    * @returns {*}
    */
 
-  async sortBy(text) {
+  getSortingOption(option) {
     const selectors = {
       "a to z": "Name (A to Z)",
       "z to a": "Name (Z to A)",
@@ -19,9 +19,9 @@ class SecondaryHeaderComponent extends BaseComponent {
       "high to low": "Price (high to low)",
     };
 
-    return await this.rootEl
-      .$('//select[@class="product_sort_container"]')
-      .selectByVisibleText(selectors[text.toLowerCase()]);
+    return this.rootEl.$(
+      `//option[text()="${selectors[option.toLowerCase()]}"]`,
+    );
   }
 }
 
