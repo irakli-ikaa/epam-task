@@ -9,10 +9,6 @@ class LoginBoxComponent extends BaseComponent {
     return this.rootEl.$('//input[@type="submit"]');
   }
 
-  get errorMessageContainer() {
-    return this.rootEl.$('//div[contains(@class, "error-message-container")]');
-  }
-
   /**
    *
    * @param  name  {'userName' | 'password'}

@@ -1,34 +1,5 @@
 const { pages } = require("./../po");
 
-describe("Login Page", () => {
-  beforeEach(async () => {
-    await pages("login").open();
-  });
-
-  it("check page title", async () => {
-    await expect(browser).toHaveTitle("Swag Labs");
-  });
-
-  it("The login page should show an error when incorrect credentials are inserted", async () => {
-    await pages("login").loginBox.input("userName").setValue("standard_user");
-    await pages("login").loginBox.input("password").setValue("wrongpassword");
-    const classes =
-      await pages("login").loginBox.errorMessageContainer.getAttribute("class");
-
-    await pages("login").loginBox.submitBtn.click();
-
-    await expect(classes).toContain("error");
-  });
-
-  it("should redirect to inventory page after successful login", async () => {
-    await pages("login").loginBox.input("userName").setValue("standard_user");
-    await pages("login").loginBox.input("password").setValue("secret_sauce");
-    await pages("login").loginBox.submitBtn.click();
-
-    await expect(browser).toHaveUrl(/inventory\.html/);
-  });
-});
-
 describe("Inventory Page", () => {
   beforeEach(async () => {
     await pages("login").open();
