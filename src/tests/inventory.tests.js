@@ -1,4 +1,4 @@
-const { pages } = require("./../po");
+const { pages } = require("../po");
 
 describe("Inventory Page", () => {
   beforeEach(async () => {
@@ -10,7 +10,11 @@ describe("Inventory Page", () => {
 
   it('UC-1: Prices should be sorted in ascending order when selecting option "Price (low to high)"', async () => {
     await pages("inventory").secondaryHeader.sortBy("low to high");
-    const pricesArr = await pages("inventory").inventoryList.getPricesArr();
+    const priceElements = await pages("inventory").inventoryList.priceElements;
+    const pricesArr = await priceElements.map(async (el) => {
+      const text = await el.getText();
+      return parseFloat(text.replace("$", ""));
+    });
     const sortedPricesArr = [...pricesArr].sort((a, b) => a - b);
     expect(pricesArr).toEqual(sortedPricesArr);
   });
