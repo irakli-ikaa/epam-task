@@ -1,11 +1,10 @@
-const { LoginBox, LoginCredentials } = require("../components");
+const { LoginBox } = require("../components");
 const BasePage = require("./base.page");
 
 class LoginPage extends BasePage {
   constructor() {
     super("/");
     this.loginBox = new LoginBox();
-    this.loginCredentials = new LoginCredentials();
   }
 }
 
